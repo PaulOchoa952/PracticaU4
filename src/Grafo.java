@@ -23,7 +23,7 @@ public class Grafo {
             return true;
         }
         
-        //el nuevo se enlaza al final de la lista  
+        
         irUltimo();
         vertice.sig=nuevo; 
         nuevo.ant=vertice;  
@@ -76,11 +76,11 @@ public class Grafo {
         NodoVertice temp=buscarVertice(dato);
         if(temp==null) return false;
         
-        //1. que el vertice no tenga aristas a otros vertices
-        if(temp.arista!=null) return false;
-        //que otros vertices no tengan arista a este vertice a eliminar
+        
+        if(temp.ari!=null) return false;
+       
         quitaAristasDeOtrosVertice(temp);
-        //Esta temp en el 1ero?
+        
         if(temp==vertice){
             if(unSoloVertice()) vertice=null;
             else{
@@ -89,12 +89,12 @@ public class Grafo {
             }
             return true;
         }
-         //esta en el ultimo?
+         
          if(temp.sig==null){
              temp.ant.sig=temp.ant=null;
              return true;
          }
-         //temp esta en medio
+         
          temp.ant.sig=temp.sig;
          temp.sig.ant=temp.ant;
          temp.sig=temp.ant=null;
@@ -126,7 +126,7 @@ public class Grafo {
                 r++;
                 vertice = vertice.sig;
             }
-            NodoArista aux = vertice.arista;
+            NodoArista aux = vertice.ari;
             irPrimero();
             while (aux != null) {
                 r = 0;

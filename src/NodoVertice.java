@@ -12,43 +12,43 @@ public class NodoVertice {
   char dato;
 NodoVertice sig;
 NodoVertice ant;
-NodoArista arista;
+NodoArista ari;
 
     public NodoVertice(char d) {
         dato=d;
         sig=ant=null;
-        arista=null;
+        ari=null;
         
     }
 
 public boolean insertarArista(NodoVertice direccion){
         NodoArista nuevo= new NodoArista(direccion);
-        if(arista==null){
-        arista=nuevo;
+        if(ari==null){
+        ari=nuevo;
         return true;
         }
         irUltimo();
-        arista.abajo=nuevo;
-        nuevo.arriba=arista;
+        ari.abajo=nuevo;
+        nuevo.arriba=ari;
         return true;
         
     }
 
     private void irUltimo() {
-      while(arista.abajo!=null){
-        arista=arista.abajo;
+      while(ari.abajo!=null){
+        ari=ari.abajo;
       
         }
 
     }
    private void irPrimero(){
-        while(arista.arriba!=null){
-        arista=arista.arriba;}
+        while(ari.arriba!=null){
+        ari=ari.arriba;}
         } 
     public NodoArista buscarArista(NodoVertice direccion){
-   if(arista==null)return null;
+   if(ari==null)return null;
         irPrimero();
-    for(NodoArista buscar=arista;buscar!=null;buscar=buscar.abajo){
+    for(NodoArista buscar=ari;buscar!=null;buscar=buscar.abajo){
         
     if(buscar.Direccion==direccion)return buscar;
         }
@@ -56,28 +56,28 @@ public boolean insertarArista(NodoVertice direccion){
     }
     
     private boolean unaSolaArista(){
-    return arista.abajo==null && arista.arriba==null;
+    return ari.abajo==null && ari.arriba==null;
     }
 
     public boolean eliminarArista(NodoVertice direccion) {
-        if(arista==null)return false;
+        if(ari==null)return false;
         NodoArista temp= buscarArista(direccion);
-        //no se encontro arista de origen a destino
+        
         if(temp==null)return false;
-        if(temp==arista){
-             if(unaSolaArista())arista=null;
+        if(temp==ari){
+             if(unaSolaArista())ari=null;
              else{
-             arista=arista.abajo;
+             ari=ari.abajo;
              temp.abajo.arriba=temp.abajo=null;
              }
              return true;
         }
-        //esta ultimo nodo
+        
         if(temp.abajo==null){
             temp.arriba.abajo=temp.arriba=null;
             return true;
         }
-        //quitar arista de enmedio de lista de aristas
+        
         temp.arriba.abajo=temp.abajo;
         temp.abajo.arriba=temp.arriba;
         temp.abajo=temp.arriba=null;
@@ -85,7 +85,7 @@ public boolean insertarArista(NodoVertice direccion){
     }
     public String toString() {
         String res = "[" + dato + "]";
-        NodoArista aux = arista;
+        NodoArista aux = ari;
         while (aux != null) {
             res += "->" + aux.Direccion.dato;
             aux = aux.abajo;
